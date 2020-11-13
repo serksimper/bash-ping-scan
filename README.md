@@ -10,6 +10,7 @@ Make the script executable and then run with ./bash-ping-scan.sh
 
 # Example output:
 
+```
 user@server:~$ ./bash-ping-scan.sh
 
 Node with IP: 10.0.0.1 is up.
@@ -29,3 +30,4 @@ Node with IP: 10.0.0.248 is up.
 Node with IP: 10.0.0.254 is up.
 
 Node with IP: 10.0.0.25 is up.
+```
