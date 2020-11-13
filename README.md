@@ -2,13 +2,13 @@
 
 Super simple bash script to enumerate hosts responding to ICMP on the local network.
 
-Credits to: https://linuxconfig.org/bash-scripts-to-scan-and-monitor-network
+Credits to: [linuxconfig.org](https://linuxconfig.org/bash-scripts-to-scan-and-monitor-network)
 
-#Usage
+# Usage
 
 Make the script executable and then run with ./bash-ping-scan.sh
 
-#Example output:
+# Example output:
 
 user@server:~$ ./bash-ping-scan.sh
 
