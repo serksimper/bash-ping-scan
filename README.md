@@ -2,7 +2,7 @@
 
 Super simple bash script to enumerate hosts responding to ICMP on the local network.
 
-Credits to: [linuxconfig.org](https://linuxconfig.org/bash-scripts-to-scan-and-monitor-network)
+Credits to: [linuxconfig.org](https://linuxconfig.org/bash-scripts-to-scan-and-monitor-network) and many others
 
 # Usage
 
