@@ -21,9 +21,6 @@ declare -a ports=("22" "23" "53" "80" "443" "8000" "8080" "9000" "9090" "135" "1
 # Array of colors to use
 declare -a colors=("$RED" "$GREEN" "$YELLOW" "$BLUE" "$MAGENTA" "$CYAN" "$LIGHTRED" "$LIGHTGREEN" "$LIGHTBLUE" "$LIGHTMAGENTA" "$LIGHTCYAN" "$WHITE" "$WHITE" "$WHITE" "$WHITE")
 
-# Associative array for response codes to colors
-declare -A response_colors=([200]=$YELLOW [300]=$BLUE [400]=$RED [500]=$RED)
-
 while true; do
     # Request the domain name or IP address
     read -p "Enter the target domain name or IP address: " hostname
@@ -32,8 +29,6 @@ while true; do
         (if nc -z -v -w5 $hostname ${ports[$i]} &> /dev/null
         then
             echo -e "${colors[$i]}Port ${ports[$i]} is open${NC}"
-        else
-            echo -e "${colors[$i]}Port ${ports[$i]} is not open${NC}"
         fi) &
     done
 
@@ -46,14 +41,23 @@ while true; do
         response=$(curl -s -o /dev/null -w "%{http_code}" http://$hostname)
 
         # Output in different colors based on the response
-        if [[ $response -eq 400 || $response -eq 500 ]]; then
-            echo -e "${response_colors[$response]}HTTP response: $response OK${NC}"
-            break
-        elif [[ ! -z ${response_colors[$response]} ]]; then
-            echo -e "${response_colors[$response]}HTTP response: $response OK${NC}"
-        else
-            echo "HTTP response: $response"
-        fi
+        case "${response:0:1}" in
+            "2")
+                echo -e "${YELLOW}HTTP response: $response OK${NC}"
+                ;;
+            "3")
+                echo -e "${BLUE}HTTP response: $response OK${NC}"
+                ;;
+            "4")
+                echo -e "${RED}HTTP response: $response OH${NC}"
+                ;;
+            "5")
+                echo -e "${RED}HTTP response: $response OK${NC}"
+                ;;
+            *)
+                echo "HTTP response: $response"
+                ;;
+        esac
 
         # Increase the count
         count=$((count + 1))
